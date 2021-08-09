@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WCF_Client")]
+[assembly: AssemblyTitle("WCF_Interface")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("WCF_Client")]
+[assembly: AssemblyProduct("WCF_Interface")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("e10e4681-8fdc-4753-b698-65a674ced32a")]
+[assembly: Guid("a2f65b95-aa0d-45bb-94bc-d4af72761ec0")]
 
 // Version information for an assembly consists of the following four values:
 //

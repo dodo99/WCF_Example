@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Threading;
 
-namespace WCF_Client
+namespace WCF_Server
 {
     static class Program
     {
@@ -16,9 +16,16 @@ namespace WCF_Client
         [STAThread]
         static void Main()
         {
+            string mutexname = Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location);
+            _ = new Mutex(true, mutexname, out bool onlyInstance);
+            if (!onlyInstance)
+            {
+                return;
+            }
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormClient());
+            Application.Run(new FormServer());
         }
     }
 }
