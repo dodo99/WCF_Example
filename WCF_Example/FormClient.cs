@@ -41,17 +41,22 @@ namespace WCF_Client
 
         private void FormClient_Load(object sender, EventArgs e)
         {
+            //with config file
             WellKnownClientTypeEntry clientEntry = getWCFServerRemotingClient();
             if (clientEntry == null)
             {
                 string exePath = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                var appName = Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location);
+                var appName = Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location) + ".exe.config";
 
-                RemotingConfiguration.Configure(Path.Combine(exePath, (appName + ".exe.config")), false);
+                RemotingConfiguration.Configure(Path.Combine(exePath, appName), false);
                 clientEntry = getWCFServerRemotingClient();
             }
-
             _interface = (IInterface)Activator.GetObject(typeof(IInterface), clientEntry.ObjectUrl);
+
+            ////without config file
+            //_interface = (IInterface)Activator.GetObject(
+            //    typeof(IInterface),
+            //    "tcp://localhost:7795/MyService.soap");
         }
 
         private void button1_Click(object sender, EventArgs e)

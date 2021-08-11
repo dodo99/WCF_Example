@@ -7,6 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Remoting;
+using System.Runtime.Remoting.Channels;
+using System.Runtime.Remoting.Channels.Tcp;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,19 +24,30 @@ namespace WCF_Server
             InitializeComponent();
 
             service = new MyService();
+
+            //with the config file
             if (RemotingConfiguration.GetRegisteredActivatedServiceTypes().Length == 0)
             {
-                var appname = Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location);
-                RemotingConfiguration.Configure(appname + ".exe.config", false);
+                var appname = Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location) + ".exe.config";
+                RemotingConfiguration.Configure(appname, false);
             }
 
-            foreach (WellKnownServiceTypeEntry entry in RemotingConfiguration.GetRegisteredWellKnownServiceTypes())
-            {
-                if (entry.ObjectType == typeof(MyService))
-                {
-                    ObjRef refObj = RemotingServices.Marshal(service, entry.ObjectUri);
-                }
-            }
+            ////without the config file
+            //var channel = new TcpChannel(7795);
+            //ChannelServices.RegisterChannel(channel, false);
+
+            //RemotingConfiguration.RegisterWellKnownServiceType(
+            //    typeof(MyService), "MyService.soap", WellKnownObjectMode.Singleton);
+
+            //// The following code is not needed in the example
+            //foreach (WellKnownServiceTypeEntry entry in RemotingConfiguration.GetRegisteredWellKnownServiceTypes())
+            //{
+            //    if (entry.ObjectType == typeof(MyService))
+            //    {
+            //        ObjRef refObj = RemotingServices.Marshal(service, entry.ObjectUri);
+            //        break;
+            //    }
+            //}
 
         }
     }
