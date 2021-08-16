@@ -16,12 +16,13 @@ namespace WCF_Server
         [STAThread]
         static void Main()
         {
-            string mutexname = Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location);
-            _ = new Mutex(true, mutexname, out bool onlyInstance);
-            if (!onlyInstance)
-            {
-                return;
-            }
+            //If config file is used, the following code is not needed
+            //string mutexname = Path.GetFileNameWithoutExtension(System.Reflection.Assembly.GetEntryAssembly().Location);
+            //_ = new Mutex(true, mutexname, out bool onlyInstance);
+            //if (!onlyInstance)
+            //{
+            //    return;
+            //}
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

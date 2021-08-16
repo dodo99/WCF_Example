@@ -26,10 +26,18 @@ namespace WCF_Server
             service = new MyService();
 
             //with the config file
-            if (RemotingConfiguration.GetRegisteredActivatedServiceTypes().Length == 0)
+            try
             {
-                var appname = Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location) + ".exe.config";
-                RemotingConfiguration.Configure(appname, false);
+                if (RemotingConfiguration.GetRegisteredActivatedServiceTypes().Length == 0)
+                {
+                    var appname = Path.GetFileNameWithoutExtension(Assembly.GetEntryAssembly().Location) + ".exe.config";
+                    RemotingConfiguration.Configure(appname, false);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw;
             }
 
             ////without the config file
